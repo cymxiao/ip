@@ -10,6 +10,13 @@ import { TabsPage } from '../pages/tabs/tabs';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { Geolocation } from '@ionic-native/geolocation';
+import { SMS } from '@ionic-native/sms';
+import { Alipay } from '@ionic-native/alipay';
+//It's quite important to delcare in provider
+import { LocalNotifications } from '@ionic-native/local-notifications';
+import { Logger } from "angular2-logger/core";
+import { GlobalErrorHandler } from '../providers/global-error-handler/global-error-handler'; 
 
 @NgModule({
   declarations: [
@@ -21,7 +28,9 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp,{
+      backButtonText: '返回',
+    })
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -34,7 +43,14 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: GlobalErrorHandler},
+    SMS,
+    LocalNotifications,
+    Alipay,
+    Logger,
+    //Amin: IMP. GlobalErrorHandler should be here, otherwise it would not be triggerred.
+    GlobalErrorHandler,
+    Geolocation 
   ]
 })
 export class AppModule {}
