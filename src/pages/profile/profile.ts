@@ -5,6 +5,7 @@ import { IUser } from '../../model/user';
 import { ICarport } from '../../model/carport'; 
 import { AppSettings } from '../../settings/app-settings';
 import { BasePage } from '../base/base';
+import { LoginPage } from '../login/login';
 import { SelectCommunityModalPage } from '../select-community-modal/select-community-modal';
 import { RestServiceProvider } from '../../providers/rest-service/rest-service';
 /**
@@ -35,6 +36,9 @@ export class ProfilePage extends BasePage {
   }
 
   ionViewDidLoad() {
+    if(AppSettings.nvaToLoginPage(this.navCtrl, LoginPage) ){
+      return;
+    } 
     super.ionViewDidLoad();
     this.user = this.currentUser;
     //console.dir(this.user);

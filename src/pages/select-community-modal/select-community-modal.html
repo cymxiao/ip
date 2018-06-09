@@ -39,26 +39,19 @@
             </ion-select>
 
         </ion-item>
-        <!-- <ion-item no-lines *ngIf="showCarportList && fieldcarport.invalid && (fieldcarport.dirty || fieldcarport.touched)">
-            <div class="text-danger" *ngIf="fieldcarport.errors.required">
-                请输入您的车位号
-            </div>
-        </ion-item> -->
+      
         <ion-item>
             <button  ion-button icon-end color="secondary" tappable (click)="btnAdd()">
                 <ion-icon name="add-circle"></ion-icon>
                 &nbsp;&nbsp;新增车位
             </button>
         </ion-item> 
- <!-- {{communityModalForm.form.invalid}} -->
+ 
         <button ion-button icon-start block round color="secondary" tappable (click)="save()" 
         [disabled]="communityModalForm.form.invalid ||!showCarportList">
             <ion-icon name="checkbox"></ion-icon>
             保存
         </button>
     </form>
-    <!-- <button ion-button icon-end class="pull-right" color="primary" tappable (click)="goBackHome()" >
-            <ion-icon name="arrow-back"></ion-icon>  
-            &nbsp;&nbsp;返回主页
-    </button> -->
+  
 </ion-content>

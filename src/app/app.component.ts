@@ -5,7 +5,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { IUser } from '../model/user';
 
-//import { LoginPage } from '../pages/login/login';
+import { LoginPage } from '../pages/login/login';
 import { SelectCommunityModalPage } from '../pages/select-community-modal/select-community-modal';
 import { PmcCarportDashboardPage } from '../pages/pmc-carport-dashboard/pmc-carport-dashboard';
 import { MyOrdersPage } from '../pages/myorders/myorders';
@@ -19,7 +19,7 @@ import { TabsPage } from '../pages/tabs/tabs';
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage: any = TabsPage ;
+  rootPage: any = LoginPage ;
   @ViewChild(Nav) nav: Nav;
   //@ViewChild(Refresher) refresher: Refresher;
   currentUser: IUser;
@@ -63,7 +63,8 @@ export class MyApp {
 
   logout() {
     localStorage.clear();
-    location.reload();
+    //location.reload();
+    this.nav.setRoot(LoginPage);
   }
  
 }

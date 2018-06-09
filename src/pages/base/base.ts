@@ -38,17 +38,17 @@ export class BasePage {
   }
 
   //Amin: todo , find the reason why the navCtrl.setRoot would cause white screen in an IOS device.
-  goBackHome() {
-    //this.navCtrl.setRoot(TabsPage);
-  }
+  // goBackHome() {
+  //   //this.navCtrl.setRoot(TabsPage);
+  // }
 
-  goBackHomeWithParam(data) {
+  //goBackHomeWithParam(data) {
     //this.navCtrl.setRoot(TabsPage, data);
-  }
+  //}
 
-  goBackHomeRefresh() {
+  //goBackHomeRefresh() {
     //this.navCtrl.setRoot(TabsPage, { "refresh": "true" });
-  }
+  //}
 
   refresh() { 
     //this.navCtrl.setRoot(this.navCtrl.getActive().component);

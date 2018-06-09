@@ -46,6 +46,15 @@ export class AppSettings{
         return JSON.parse(localStorage.getItem('carport'));
     }
 
+    public static nvaToLoginPage(navCtrl, targetPage){
+        console.dir(this.getCurrentUser());
+        if(!this.getCurrentUser() || !this.getCurrentUser()._id) {
+            navCtrl.setRoot(targetPage);
+            return true;
+        }
+        return false;
+    }
+
     public static getDisplayText(input: any, dict: any) {
         if (input && input.length > 0 && dict.filter(pu => { return pu.value === input[0] })
           && dict.filter(pu => { return pu.value === input[0] }).length > 0) {

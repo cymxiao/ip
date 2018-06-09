@@ -7,6 +7,7 @@ import { ILeisurePark, IUILeisurePark } from '../../model/leisurePark';
 import { IUser } from '../../model/user';
 import { ICommunity } from '../../model/community';
 import { ICarport } from '../../model/carport';
+import { LoginPage } from '../login/login';
 import { SelectCommunityModalPage } from '../select-community-modal/select-community-modal';
 import { AppSettings, UserRoleEnum } from '../../settings/app-settings';
 
@@ -25,7 +26,7 @@ import { BasePage } from '../base/base';
   selector: 'page-leisure-park',
   templateUrl: 'leisure-park.html',
 })
-export class LeisureParkPage extends BasePage{
+export class LeisureParkPage extends BasePage {
 
 
   leisurePark: ILeisurePark;
@@ -53,7 +54,7 @@ export class LeisureParkPage extends BasePage{
     //public monent: Moment,
     public alertCtrl: AlertController,
     public modalCtrl: ModalController) {
-      super(navCtrl,params);
+    super(navCtrl, params);
     //this.failedForValidation = this.wrongStartTime || this.wrongEndTime || this.wrongPrice;
     this.leisurePark = {
       id: '',
@@ -77,9 +78,9 @@ export class LeisureParkPage extends BasePage{
       position: '',
       mapid: '',
       city_ID: '',
-      PMC:'',
-      price:'',
-      priceUnit:'天',
+      PMC: '',
+      price: '',
+      priceUnit: '天',
       address: ''
     }
 
@@ -88,13 +89,13 @@ export class LeisureParkPage extends BasePage{
       username: '',
       password: '',
       community_ID: this.currentCommunity,
-      account_ID:'',
+      account_ID: '',
       role: '',
       phoneNo: '',
       address: '',
       lastLoginDate: null,
-      carPlate:'',
-      status:'',
+      carPlate: '',
+      status: '',
       name: ''
     }
 
@@ -111,32 +112,37 @@ export class LeisureParkPage extends BasePage{
   }
 
   ionViewDidLoad() {
+    if(AppSettings.nvaToLoginPage(this.navCtrl, LoginPage) ){
+      return;
+    } 
     super.menuActive(this.menuCtrl);
     this.minDate = this.getGoodTime().add(8, 'hours').toISOString();
     this.minDateforEndTime = this.getGoodTime().add(12, 'hours').toISOString();
     this.currentUser = AppSettings.getCurrentUser();
     this.currentCarport = AppSettings.getCurrentCarport();
-    if (!this.currentUser.community_ID || !this.currentUser.community_ID._id
-      || !this.currentCarport || !this.currentCarport.parkingNumber) {
-      if (!this.currentUser.role || (this.currentUser.role && this.currentUser.role[0] !== UserRoleEnum.PMCUser)) {
-        this.navCtrl.push(SelectCommunityModalPage, { source: "leisurepark" });
-      }
-    } else {
-      if (!AppSettings.getCurrentCarport()) {
-        this.service.getCarportListByOwnerId(this.currentUser._id).then((carp: any) => {
-          if (carp && carp.length > 0) {
-            let filterResult: any = carp.filter((f: any) => { return f.isCurrent === true });
-            if (filterResult && filterResult.length > 0) {
-              this.currentCarport = filterResult[0];
-            }
-            localStorage.setItem('carport', JSON.stringify(this.currentCarport));
-          }
-        });
+    if (this.currentUser && this.currentUser._id) {
+      if (!this.currentUser.community_ID || !this.currentUser.community_ID._id
+        || !this.currentCarport || !this.currentCarport.parkingNumber) {
+        if (!this.currentUser.role || (this.currentUser.role && this.currentUser.role[0] !== UserRoleEnum.PMCUser)) {
+          this.navCtrl.push(SelectCommunityModalPage, { source: "leisurepark" });
+        }
       } else {
-        this.currentCarport = AppSettings.getCurrentCarport();
+        if (!AppSettings.getCurrentCarport()) {
+          this.service.getCarportListByOwnerId(this.currentUser._id).then((carp: any) => {
+            if (carp && carp.length > 0) {
+              let filterResult: any = carp.filter((f: any) => { return f.isCurrent === true });
+              if (filterResult && filterResult.length > 0) {
+                this.currentCarport = filterResult[0];
+              }
+              localStorage.setItem('carport', JSON.stringify(this.currentCarport));
+            }
+          });
+        } else {
+          this.currentCarport = AppSettings.getCurrentCarport();
+        }
       }
+      this.getLeisureParkforOwner();
     }
-    this.getLeisureParkforOwner();
   }
 
 
@@ -147,7 +153,7 @@ export class LeisureParkPage extends BasePage{
       if (!this.currentUser.role || (this.currentUser.role && this.currentUser.role[0] !== UserRoleEnum.PMCUser)) {
         this.navCtrl.push(SelectCommunityModalPage, { source: "leisurepark" });
       }
-    } 
+    }
 
     let time = moment();
     let previousRecordEndTime = time;
@@ -161,7 +167,7 @@ export class LeisureParkPage extends BasePage{
             if (time.isBefore(previousRecordEndTime)) {
               time = previousRecordEndTime;
             }
-          }  
+          }
           if (time.minute() < 30) {
             time.minute(30).second(0);
           } else {
@@ -176,11 +182,11 @@ export class LeisureParkPage extends BasePage{
           this.showAddContent = true;
 
         });
-        this.leisurePark.price = this.currentUser.community_ID.price ;
-        this.leisurePark.priceUnit = this.currentUser.community_ID.priceUnit ;
+      this.leisurePark.price = this.currentUser.community_ID.price;
+      this.leisurePark.priceUnit = this.currentUser.community_ID.priceUnit;
     }
 
-  
+
     // //Amin: IMP.  +8 display as local timezone .
     // this.leisurePark.startTime = this.getGoodTime().add(8, 'hours').toISOString();
     // //Amin: IMP. I can't direct use add(8, 'hours'), otherwise when validate endTime, 
