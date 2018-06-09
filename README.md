@@ -55,6 +55,7 @@ ionic cordova build ios --prod --release --livereload
 ionic cordova build ios --prod --release --livereload --consolelogs
 
 ionic cordova run ios --prod --release
+ionic cordova run ios --prod --release --consolelogs
 
 https://ionicframework.com/docs/intro/deploying/
 
