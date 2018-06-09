@@ -1,1 +1,74 @@
-<ion-nav [root]="rootPage"></ion-nav>
+ 
+<ion-menu [content]="content" id="menu">
+  <ion-header>
+    <ion-toolbar color="primary">
+      <ion-title>个人中心</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content padding>
+ 
+    <ion-list>
+      <button ion-item (click)="myProfile()" menuClose>
+        <ion-icon name="contact"></ion-icon>
+        &nbsp;&nbsp;&nbsp;我的资料
+      </button>
+      <button ion-item (click)="myCredit()" menuClose>
+        <ion-icon name="cash"></ion-icon>
+        &nbsp;&nbsp;&nbsp;我的钱包
+      </button>
+      <button ion-item (click)="myCarports()" menuClose>
+        <ion-icon name="umbrella"></ion-icon>
+        &nbsp;&nbsp;&nbsp;车位登记
+      </button>
+      <button ion-item (click)="myOrders()" menuClose>
+        <ion-icon name="basket"></ion-icon>
+        &nbsp;&nbsp;&nbsp;我的订单
+      </button>
+
+      <button ion-item (click)="goBackHome()" menuClose>
+        <ion-icon name="undo"></ion-icon>
+        &nbsp;&nbsp;&nbsp;返回主页
+      </button>
+      <div class="logoutDiv">
+        <button ion-item (click)="logout()" menuClose>
+          <ion-icon name="log-out"></ion-icon>
+          &nbsp;&nbsp;&nbsp;退出登陆
+        </button>
+      </div>
+    </ion-list>
+
+  </ion-content>
+</ion-menu>
+
+
+<ion-menu [content]="content" id="menuPMC">
+  <ion-header>
+    <ion-toolbar color="primary">
+      <ion-title>我的资料</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content padding>
+
+    <ion-list>
+      <button  ion-item (click)="myProfile()" menuClose>
+        <ion-icon name="contact"></ion-icon>
+        &nbsp;&nbsp;&nbsp;我的资料
+      </button>
+      <button ion-item (click)="mgrCarports()" menuClose>
+        <ion-icon name="umbrella"></ion-icon>
+        &nbsp;&nbsp;&nbsp;共享车位管理
+      </button>
+      <div class="logoutDiv">
+        <button ion-item (click)="logout()" menuClose>
+          <ion-icon name="log-out"></ion-icon>
+          &nbsp;&nbsp;&nbsp;退出登陆
+        </button>
+      </div>
+    </ion-list>
+
+  </ion-content>
+</ion-menu>
+
+<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>

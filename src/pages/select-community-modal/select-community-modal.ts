@@ -49,10 +49,10 @@ export class SelectCommunityModalPage extends BasePage {
     public alertCtrl: AlertController,
     public service: RestServiceProvider) {
     super(navCtrl, navParams);
-    //super();
+     
     this.comReadOnly =  this.navParams.get("comReadOnly");
     this.source = this.navParams.get("source");
-    //console.log('param comReadOnly : ' + this.navParams.get("comReadOnly") );
+     
   }
 
   ionViewDidLoad() {
@@ -61,10 +61,7 @@ export class SelectCommunityModalPage extends BasePage {
     this.getCarportList();
   }
 
-  // ionViewWillEnter()
-  // {
-  //   console.log('ionViewWillEnter' + this.navParams.get("refresh"));
-  // }
+   
 
   initComponents() {
     this.user = AppSettings.getCurrentUser();

@@ -50,6 +50,8 @@ ionic cordova run ios -l -c
 
 ionic cordova build ios --prod --release 
 
+ionic cordova build ios --prod --release --livereload
+
 ionic cordova build ios --prod --release --livereload --consolelogs
 
 ionic cordova run ios --prod --release
