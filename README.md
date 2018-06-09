@@ -90,4 +90,4 @@ since I use cellphone to do regeister and login on one page, how to avoid if a u
 5. add a clear credit function by PMC company and normal user. ( Todo: I need to avoid no credit clean once it has been used to pay.) Now the account_ID in user table is wrong.
 6. add carPlate field for leisurepark record. 
 7. default price and priceTage value as the value in community when add a new leisurepark 
-8. white screen issue when app load.
+8. white screen issue when app load.  (Resolved, angular2-logger caused this issue.)

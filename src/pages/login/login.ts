@@ -7,11 +7,10 @@ import { RegisterPage } from "../register/register";
 import { IUser } from '../../model/user';
 import { IAccount } from '../../model/account';
 import { ICarport } from '../../model/carport';
-//import { AdminDashboardPage } from '../admin-dashboard/admin-dashboard';
-//import { PmcCarportDashboardPage } from '../pmc-carport-dashboard/pmc-carport-dashboard';
+import { AdminDashboardPage } from '../admin-dashboard/admin-dashboard';
+import { PmcCarportDashboardPage } from '../pmc-carport-dashboard/pmc-carport-dashboard';
 import { RestServiceProvider } from '../../providers/rest-service/rest-service';
-import { Logger } from "angular2-logger/core";
-
+ 
 import { AppSettings, UserRoleEnum } from '../../settings/app-settings';
 import { SmsCodeComponent } from '../../components/sms-code/sms-code';
 import { BasePage } from '../base/base';
@@ -48,7 +47,7 @@ export class LoginPage extends BasePage {
   }
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
-    private logger: Logger,
+
     public service: RestServiceProvider) {
     super(navCtrl, navParams);
     this.user = { phone: '', pwd: '' };
@@ -98,8 +97,7 @@ export class LoginPage extends BasePage {
         });
       } else {
         this.wrongUsrorPwd = true;
-        //console.log('wrong username or password');
-        this.logger.error('wrong username or password.');
+        //console.log('wrong username or password'); 
       }
     });
   }
@@ -117,17 +115,17 @@ export class LoginPage extends BasePage {
 
   redirctPage(usr: IUser) { 
     if (usr) { 
-      // if ( usr.role && usr.role[0] === UserRoleEnum.PMCUser ) {
+      if ( usr.role && usr.role[0] === UserRoleEnum.PMCUser ) {
 
-      //   localStorage.setItem('user', JSON.stringify(usr));
-      //   this.navCtrl.setRoot(PmcCarportDashboardPage, { "refresh": "true" });
-      // } else {
-      //   if (usr.username === AppSettings.PHONE_ADMIN) {
-      //     this.navCtrl.setRoot(AdminDashboardPage);
-      //   } else {
-      //     this.navCtrl.setRoot(TabsPage);
-      //   }
-      // }  
+        localStorage.setItem('user', JSON.stringify(usr));
+        this.navCtrl.setRoot(PmcCarportDashboardPage, { "refresh": "true" });
+      } else {
+        if (usr.username === AppSettings.PHONE_ADMIN) {
+          this.navCtrl.setRoot(AdminDashboardPage);
+        } else {
+          this.navCtrl.setRoot(TabsPage);
+        }
+      }  
       this.navCtrl.setRoot(TabsPage);
     }
   }
